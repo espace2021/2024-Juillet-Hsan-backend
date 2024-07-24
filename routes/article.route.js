@@ -2,6 +2,7 @@ const express=require("express")
 const Article=require("../models/article")
 const router=express.Router()
 
+
 router.post("/",async(req,res)=>{
 const art1=new Article(req.body)
 try {
@@ -104,8 +105,37 @@ router.get('/art/pagination', async(req, res) => {
      }
    });
  
+   //pagination avec use useSearchParams react
+
+router.get('/art/paginationUSP', async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const searchQuery = req.query.searchQuery || "";
   
-     
+    const articles= await Article.find({ designation: { $regex: searchQuery, $options: "i"}}, null, {sort: {'_id': -1}}).populate("scategorieID").exec()
+
+    const tot = articles.length;
+
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
   
+    const results = {};
+    if (endIndex < articles.length) {
+      results.next = {
+        page: page + 1,
+        limit: limit
+      };
+    }
+  
+    if (startIndex > 0) {
+      results.previous = {
+        page: page - 1,
+        limit: limit
+      };
+    }
+  
+    results.results = articles.slice(startIndex, endIndex);
+    res.json({results,tot});
+  });  
   
 module.exports=router

@@ -26,10 +26,7 @@ app.get("/contact",(req,res)=>{
 })
 
 // Connexion à la base données
-mongoose.connect(process.env.DATABASECLOUD,{
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-    })
+mongoose.connect(process.env.DATABASECLOUD)
     .then(() => {console.log("Connexion à la base de données réussie");
    }).catch(err => {
     console.log('Impossible de se connecter à la base de données', err);
