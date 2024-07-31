@@ -47,13 +47,12 @@ router.post('/register', async (req, res) => {
              <a href="http://${req.headers.host}/api/users/status/edit?email=${newUser.email}">Click here</a>`
     };
 
-    await transporter.sendMail(mailOption, function(error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log('Verification email sent to your gmail account');
-      }
-    });
+    try {
+      await transporter.sendMail(mailOption);
+      console.log('Verification email sent to your gmail account');
+    } catch (error) {
+      console.log(error);
+    }
 
     return res.status(201).send({ success: true, message: "Account created successfully", user: newUser });
   } catch (error) {
