@@ -47,7 +47,7 @@ router.post('/register', async (req, res) => {
              <a href="http://${req.headers.host}/api/users/status/edit?email=${newUser.email}">Click here</a>`
     };
 
-    transporter.sendMail(mailOption, function(error, info) {
+    await transporter.sendMail(mailOption, function(error, info) {
       if (error) {
         console.log(error);
       } else {
