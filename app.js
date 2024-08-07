@@ -16,6 +16,7 @@ const scategorieRouter=require('./routes/scategorie.route')
 const articleRouter=require('./routes/article.route')
 const userRouter = require( "./routes/user.route.js")
 const paymentRouter =require("./routes/payment.route.js");
+const locationRouter =require("./routes/location.route.js");
 
 dotenv.config()
 app.get("/",(req,res)=>{
@@ -37,6 +38,7 @@ app.use("/api/scategories",scategorieRouter)
 app.use("/api/articles",articleRouter)
 app.use('/api/users', userRouter);
 app.use('/api/payment', paymentRouter);
+app.use('/api/locations', locationRouter);
 
 app.listen(process.env.PORT)
 console.log("application executée sur le port " + process.env.PORT)

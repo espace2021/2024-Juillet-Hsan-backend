@@ -49,7 +49,7 @@ router.post('/register', async (req, res) => {
 
     try {
       await transporter.sendMail(mailOption);
-      console.log('Verification email sent to your gmail account');
+      console.log('Verification email sent to your  account');
     } catch (error) {
       console.log(error);
     }
