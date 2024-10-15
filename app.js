@@ -40,6 +40,9 @@ app.use('/api/users', userRouter);
 app.use('/api/payment', paymentRouter);
 app.use('/api/locations', locationRouter);
 
+app.use(express.static(path.join(__dirname, './client/build'))); // Route pour les pages non trouvées, redirige vers index.html 
+app.get('*', (req, res) => { res.sendFile(path.join(__dirname, './client/build/index.html')); });
+
 app.listen(process.env.PORT)
 console.log("application executée sur le port " + process.env.PORT)
 module.exports = app;
