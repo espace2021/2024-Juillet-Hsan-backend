@@ -2,7 +2,10 @@ const express=require("express")
 const dotenv=require("dotenv")
 const mongoose=require("mongoose")
 const cors=require("cors")
-const app=express()
+const path = require('path'); // Ajout de l'importation de path
+
+const app = express();
+
 app.use(cors({
     origin:'*'
 }))
